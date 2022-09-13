@@ -57,8 +57,5 @@ class RolesTableSeeder extends Seeder
                 'deletable' => false,
             ]
         );
-
-
     }
-
 }

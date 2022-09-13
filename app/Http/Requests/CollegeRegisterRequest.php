@@ -3,12 +3,12 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Spatie\Multitenancy\Models\Concerns\UsesLandlordConnection;
+
 
 
 class CollegeRegisterRequest extends FormRequest
 {
-    use UsesLandlordConnection;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,9 +29,6 @@ class CollegeRegisterRequest extends FormRequest
         return [
             'college_name' => ['required', 'string', 'max:255', 'min:6'],
             'college_shorthand' => ['required', 'string', 'max:25', 'min:3'],
-            'email' => ['required', 'string', 'email'],
-            'username' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'confirmed']
         ];
     }
 }

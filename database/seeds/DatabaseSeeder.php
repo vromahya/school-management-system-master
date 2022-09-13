@@ -1,11 +1,12 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\User;
 use App\Role;
+use App\User;
+use App\AppMeta;
 use App\UserRole;
 use App\Permission;
-use App\AppMeta;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        echo PHP_EOL , 'cleaning old data....', PHP_EOL;
+        echo PHP_EOL, 'cleaning old data....', PHP_EOL;
 
         DB::statement("SET foreign_key_checks=0");
 
@@ -34,6 +35,5 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
         $this->call(PermissionTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-
     }
 }

@@ -26,9 +26,11 @@ class RegisterCollege extends Controller
             'database' => 'sms_' . $request->college_shorthand
         ]);
         $this->createDatabase($name);
-        $id = $tenant->id;
 
-        Artisan::call('tenants:artisan migrate', [' --tenant' => $id]);
+
+        Artisan::call("tenants:artisan 'migrate --seed' --tenant={$tenant->id}");
+
+
 
 
         return redirect()->route('post-register')->with('message', 'Tenant created');

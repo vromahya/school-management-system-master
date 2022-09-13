@@ -1,5 +1,5 @@
 <!-- Master page  -->
-@extends('backend.layouts.front_master')
+@extends('backend.layouts.register_layout')
 
 <!-- Page title -->
 @section('pageTitle') Register College @endsection
@@ -48,27 +48,7 @@
                     <input autofocus type="text" class="form-control" name="college_shorthand" placeholder="College shorthand to be used in domain" required minlength="3" maxlength="255">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     <span class="text-danger">{{ $errors->first('college-shorthand') }}</span>
-                </div>
-                <div class="form-group has-feedback">
-                    <input autofocus type="text" class="form-control" name="email" placeholder="email of main admin" required>
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                </div>
-                <div class="form-group has-feedback">
-                    <input autofocus type="text" class="form-control" name="username" placeholder="username of main admin" required>
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    <span class="text-danger">{{ $errors->first('username') }}</span>
-                </div>
-                <div class="form-group has-feedback">
-                    <input type="password" class="form-control" name="password" placeholder="Password" required minlength="6" maxlength="255">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                </div>
-                <div class="form-group has-feedback">
-                    <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required minlength="6" maxlength="255">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
-                </div>                
+                </div>                              
                 <br>
                 <button type="submit" class="btn btn-lg btn-block btn-flat login-button">REGISTER</button>
             </form>
