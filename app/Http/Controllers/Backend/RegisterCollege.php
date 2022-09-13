@@ -30,9 +30,6 @@ class RegisterCollege extends Controller
 
         Artisan::call("tenants:artisan 'migrate --seed' --tenant={$tenant->id}");
 
-
-
-
         return redirect()->route('post-register')->with('message', 'Tenant created');
     }
 
