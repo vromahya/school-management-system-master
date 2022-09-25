@@ -37,7 +37,7 @@
         </div>
         <div class="login-box-body">
             <p class="login-box-msg text-danger">Register College</p>
-            <form novalidate id="loginForm" action="{{URL::Route('store-college')}}" method="post" enctype="multipart/form-data">
+            <form novalidate id="loginForm" action="{{route('store-college')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group has-feedback">
                     <input autofocus type="text" class="form-control" name="college_name" placeholder="college name" required minlength="5" maxlength="255">

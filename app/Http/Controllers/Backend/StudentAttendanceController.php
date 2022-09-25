@@ -85,8 +85,6 @@ class StudentAttendanceController extends Controller
                 ->pluck('name', 'id');
         }
 
-
-
         return view('backend.attendance.student.list', compact(
             'academic_years',
             'classes',

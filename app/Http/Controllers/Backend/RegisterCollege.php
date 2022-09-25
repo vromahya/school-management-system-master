@@ -16,21 +16,27 @@ class RegisterCollege extends Controller
     {
         return view('backend.register-college');
     }
-    public function store(CollegeRegisterRequest $request)
+    public function store(Request $request)
     {
-        // $database = $this->createDatabase();
-        $name = 'sms_' . $request->college_shorthand;
+	try {
+	$name = 'sms_' . $request->college_shorthand;
         $tenant = Tenant::create([
             'name' => $request->college_name,
-            'domain' => $request->college_shorthand . '.' . 'localhost',
+            'domain' => $request->college_shorthand . '.' . 'sms.symbytel.com',
             'database' => 'sms_' . $request->college_shorthand
         ]);
-        $this->createDatabase($name);
 
-
-        Artisan::call("tenants:artisan 'migrate --seed' --tenant={$tenant->id}");
+        $this->createDatabase($name);    
+        Artisan::call("tenants:artisan 'migrate --seed --force' --tenant={$tenant->id}");
 
         return redirect()->route('post-register')->with('message', 'Tenant created');
+	    
+	} catch(Exception $ex){
+		return redirect()->route('post-register')->with('message', $ex);
+	
+	}
+	
+       
     }
 
     public function post_register()
@@ -44,7 +50,7 @@ class RegisterCollege extends Controller
     }
     private function createDatabase($name)
     {
-        $conn = new mysqli('localhost', 'root', 'mysql');
+        $conn = new mysqli('localhost', 'root', 'password');
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
