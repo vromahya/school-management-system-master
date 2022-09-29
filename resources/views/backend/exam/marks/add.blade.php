@@ -130,7 +130,7 @@
                                                         </td>
                                                         @foreach($marksDistributions as $distribution)
                                                             <td>
-                                                                <input type="number" class="form-control" name="type[{{$student->id}}][{{$distribution->type}}]" value="" required max="{{$distribution->total_marks}}" min="0">
+                                                                <input type="number" class="form-control" name="marks_type[{{$student->id}}][{{$distribution->type}}]" value="" required max="{{$distribution->total_marks}}" min="0">
                                                             </td>
                                                         @endforeach
                                                         <td>

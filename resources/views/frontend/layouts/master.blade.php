@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="{{ app()->getLocale() }}">
+<html lang="en">
 
 <head>
 	<title>{{$siteInfo['short_name']}} | @yield('pageTitle')</title>
@@ -18,13 +18,13 @@
      <!-- Child Page css -->
 
     <!-- Locale specific font size for menu -->
-    @if(app()->getLocale() == 'bn')
+    {{-- @if(app()->getLocale() == 'bn')
         <style>
             .main-nav>ul>li {
                 font-size: 18px;
             }
         </style>
-        @endif
+        @endif --}}
 </head>
 
 <body>

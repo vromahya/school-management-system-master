@@ -48,6 +48,31 @@
                     <input autofocus type="text" class="form-control" name="college_shorthand" placeholder="College shorthand to be used in domain" required minlength="3" maxlength="255">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     <span class="text-danger">{{ $errors->first('college-shorthand') }}</span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input autofocus type="text" class="form-control" name="name" placeholder="Name" required minlength="3" maxlength="255">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input autofocus type="text" class="form-control" name="username" placeholder="Username" required minlength="3" maxlength="255">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    <span class="text-danger">{{ $errors->first('username') }}</span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input autofocus type="text" class="form-control" name="email" placeholder="Email" required minlength="3" maxlength="255">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input autofocus type="password" class="form-control" name="password" placeholder="Password" required minlength="3" maxlength="255">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                </div>
+                <div class="form-group has-feedback">
+                    <input autofocus type="password" class="form-control" name="password_confirmed" placeholder="Confirm Password" required minlength="3" maxlength="255">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    <span class="text-danger">{{ $errors->first('password') }}</span>
                 </div>                              
                 <br>
                 <button type="submit" class="btn btn-lg btn-block btn-flat login-button">REGISTER</button>

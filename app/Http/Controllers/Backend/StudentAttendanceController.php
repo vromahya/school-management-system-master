@@ -195,7 +195,6 @@ class StudentAttendanceController extends Controller
         return view('backend.attendance.student.add', compact(
             'academic_years',
             'classes',
-            'sections',
             'students',
             'class_name',
             'academic_year',
@@ -285,7 +284,7 @@ class StudentAttendanceController extends Controller
         $absentIds = [];
         $parseError = false;
         $message = "";
-        $timeZero = Carbon::createFromFormat('Y-m-dHis', $attendance_date.'000000');
+        $timeZero = Carbon::createFromFormat('Y-m-dHis', $attendance_date . '000000');
 
         foreach ($students as $student) {
 
@@ -294,7 +293,7 @@ class StudentAttendanceController extends Controller
             $timeDiff  = $inTime->diff($outTime)->format('%H:%I');
 
             $isPresent = '1';
-            if(!isset($present[$student])){
+            if (!isset($present[$student])) {
                 $inTime = $timeZero;
                 $outTime = $timeZero;
                 $timeDiff = '00:00:00';

@@ -18,26 +18,36 @@ class RegisterCollege extends Controller
     }
     public function store(Request $request)
     {
-	try {
-	$name = 'sms_' . $request->college_shorthand;
-        $tenant = Tenant::create([
-            'name' => $request->college_name,
-            'domain' => $request->college_shorthand . '.' . 'sms.symbytel.com',
-            'database' => 'sms_' . $request->college_shorthand
-        ]);
+        try {
+            $DBname = 'sms_' . $request->college_shorthand;
 
-        $this->createDatabase($name);    
-        Artisan::call("tenants:artisan 'migrate --seed --force' --tenant={$tenant->id}");
+            $tenant = Tenant::create([
+                'name' => $request->college_name,
+                'domain' => $request->college_shorthand . '.' . 'localhost',
+                'database' => $DBname
+            ]);
 
-        return redirect()->route('post-register')->with('message', 'Tenant created');
-	    
-	} catch(Exception $ex){
-		return redirect()->route('post-register')->with('message', $ex);
-	
-	}
-	
-       
+            $username = $request->username;
+            $password = $request->password;
+            $name = $request->name;
+            $email = $request->email;
+
+
+            $this->createDatabase($DBname);
+
+            Artisan::call("tenants:artisan 'migrate --seed --force' --tenant={$tenant->id}");
+
+            $this->seedUser($DBname, $username, $password, $name, $email);
+            $domain = $request->college_shorthand;
+            $url = $domain . '.' . 'localhost:8000/dashboard';
+
+            return redirect()->away($url);
+        } catch (\Exception $ex) {
+
+            return redirect()->route('post-register')->with('message', $ex);
+        }
     }
+
 
     public function post_register()
     {
@@ -50,7 +60,7 @@ class RegisterCollege extends Controller
     }
     private function createDatabase($name)
     {
-        $conn = new mysqli('localhost', 'root', 'password');
+        $conn = new mysqli('localhost', env('DB_USERNAME', 'root'), env('DB_PASSWORD', 'mysql'));
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
@@ -65,6 +75,40 @@ class RegisterCollege extends Controller
             echo "Error creating database: " . $conn->error;
         }
 
+        // closing connection
+        $conn->close();
+    }
+    private function seedUser($DBname, $username, $password, $name, $email)
+    {
+        $conn = new mysqli('localhost', env('DB_USERNAME', 'root'), env('DB_PASSWORD', 'mysql'), $DBname);
+        // Check connection
+        if ($conn->connect_error) {
+
+            die("Connection failed: " . $conn->connect_error);
+        }
+        // Creating a database named newDB
+        $encryptedPassword = bcrypt($password);
+
+        $sql = "INSERT INTO users (username, password, email, name) VALUES ('$username', '$encryptedPassword', '$email', '$name')";
+
+        $conn->query($sql);
+
+        $sql = "SELECT id FROM users WHERE username = '$username'";
+
+        $res = $conn->query($sql);
+
+        $row = $res->fetch_assoc();
+
+        $id = $row["id"];
+
+        $sql = "INSERT INTO user_roles(user_id, role_id) VALUES ($id, 1)";
+
+        if ($conn->query($sql) === TRUE) {
+
+            echo "User with username $username created";
+        } else {
+            echo "Error creating user " . $conn->error;
+        }
         // closing connection
         $conn->close();
     }

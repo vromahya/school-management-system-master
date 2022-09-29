@@ -37,17 +37,17 @@
 						<i class="fa fa-language"></i>
 					</div>
 
-					<div class="cws_lang_links">
+					{{-- <div class="cws_lang_links">
 						<a href="{{route('setLocale','bn')}}" class="cws_lang_link" title="বাংলা">
 							<i class="lang-icon flag-icon flag-icon-bd"></i>
 						</a>
 						<a href="{{route('setLocale','en')}}" class="cws_lang_link" title="English">
 							<i class="lang-icon flag-icon flag-icon-gb"></i>
-						</a>
+						</a> --}}
 						{{--<a href="/in" class="cws_lang_link" title="Hindi">--}}
 							{{--<i class="lang-icon flag-icon flag-icon-in"></i>--}}
 						{{--</a>--}}
-					</div>
+					{{-- </div> --}}
 				</div>
 
 
