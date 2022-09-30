@@ -20,10 +20,10 @@ class RegisterCollege extends Controller
     {
         try {
             $DBname = 'sms_' . $request->college_shorthand;
-
+            $domain = $request->college_shorthand . '.' . 'sms.symbytel.com';
             $tenant = Tenant::create([
                 'name' => $request->college_name,
-                'domain' => $request->college_shorthand . '.' . 'localhost',
+                'domain' => $domain,
                 'database' => $DBname
             ]);
 
@@ -38,10 +38,8 @@ class RegisterCollege extends Controller
             Artisan::call("tenants:artisan 'migrate --seed --force' --tenant={$tenant->id}");
 
             $this->seedUser($DBname, $username, $password, $name, $email);
-            $domain = $request->college_shorthand;
-            $url = $domain . '.' . 'localhost:8000/dashboard';
 
-            return redirect()->away($url);
+            return redirect()->route('post-register');
         } catch (\Exception $ex) {
 
             return redirect()->route('post-register')->with('message', $ex);
@@ -60,7 +58,7 @@ class RegisterCollege extends Controller
     }
     private function createDatabase($name)
     {
-        $conn = new mysqli('localhost', env('DB_USERNAME', 'root'), env('DB_PASSWORD', 'mysql'));
+        $conn = new mysqli('localhost', env('DB_USERNAME', 'root'), env('DB_PASSWORD', 'password'));
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
@@ -80,7 +78,7 @@ class RegisterCollege extends Controller
     }
     private function seedUser($DBname, $username, $password, $name, $email)
     {
-        $conn = new mysqli('localhost', env('DB_USERNAME', 'root'), env('DB_PASSWORD', 'mysql'), $DBname);
+        $conn = new mysqli('localhost', env('DB_USERNAME', 'root'), env('DB_PASSWORD', 'password'), $DBname);
         // Check connection
         if ($conn->connect_error) {
 
