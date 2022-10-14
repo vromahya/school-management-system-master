@@ -70,7 +70,7 @@
                                             <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="select gender type"></i>
                                         </label>
                                         @php $param = ['class' => 'form-control select2', 'placeholder' => 'select an option', 'required' => 'true']; if($gender) { $param['readonly'] = 'true'; } @endphp
-                                        {!! Form::select('gender', AppHelper::GENDER, $gender , $param) !!}
+                                        {!! Form::select('gender', AppHelper::GENDER, $gender ,  ['class' => 'form-control select2', 'placeholder' => 'select an option', 'required' => 'true']) !!}
                                         <span class="form-control-feedback"></span>
                                         <span class="text-danger">{{ $errors->first('gender') }}</span>
                                     </div>
@@ -103,7 +103,7 @@
                                         <label for="nationality">Nationality<span class="text-danger">*</span>
                                             <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="select nationality"></i>
                                         </label>
-                                        {!! Form::select('nationality', ['Bangladeshi' => 'Bangladeshi', 'Other' => 'Other'], $nationality , ['class' => 'form-control', 'required' => 'true']) !!}
+                                        {!! Form::select('nationality', ['Indian' => 'Indian', 'Other' => 'Other'], $nationality , ['class' => 'form-control', 'required' => 'true']) !!}
                                         <span class="form-control-feedback"></span>
                                         <span class="text-danger">{{ $errors->first('nationality') }}</span>
                                     </div>
@@ -111,7 +111,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group has-feedback">
                                         <label for="nationality">Nationality</label>
-                                        <input  type="text" class="form-control" name="nationality_other" @if(!$student || $student->nationality == "Bangladeshi") readonly @endif placeholder="Nationality" value="@if($student && $student->nationality != "Bangladeshi"){{$student->nationality}}@else{{old('nationality')}}@endif" maxlength="50" >
+                                        <input  type="text" class="form-control" name="nationality_other" @if(!$student || $student->nationality == "Indian") readonly @endif placeholder="Nationality" value="@if($student && $student->nationality != "Indian"){{$student->nationality}}@else{{old('nationality')}}@endif" maxlength="50" >
                                         <span class="fa fa-map-marker form-control-feedback"></span>
                                         <span class="text-danger">{{ $errors->first('nationality_other') }}</span>
                                     </div>
